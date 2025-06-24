@@ -62,11 +62,11 @@ class CustomSettingsActivity : AppCompatActivity() {
         if(isLoggedIn) {
             btnOption1.visibility = View.GONE
             btnOption2.visibility = View.VISIBLE
-            textViewDescription.text = "Finaliza tu sesión de Zettle haciendo clic en el botón a continuación."
+            textViewDescription.text = "End your Zettle session by clicking the button below."
         } else {
             btnOption2.visibility = View.GONE
             btnOption1.visibility = View.VISIBLE
-            textViewDescription.text = "Para comenzar a aceptar pagos con tarjeta, por favor, inicia sesión con tu cuenta de Zettle."
+            textViewDescription.text = "To start accepting card payments, please log in to your Zettle account."
         }
            
     }
