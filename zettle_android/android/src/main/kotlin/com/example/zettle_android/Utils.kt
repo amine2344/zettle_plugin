@@ -5,6 +5,7 @@ import androidx.annotation.NonNull
 
 // Enum class representing different Zettle methods
 enum class ZettleMethod(val value: String, val code: Int) {
+
   INITIALIZE("initialize", 0),
   SHOW_SETTINGS("showSettings", 1),
   LOGIN("login", 2),
@@ -12,7 +13,10 @@ enum class ZettleMethod(val value: String, val code: Int) {
   REQUEST_PAYMENT("requestPayment", 4),
   REQUEST_REFUND("requestRefund", 5),
   RETRIEVE_PAYMENT("retrievePayment", 6),
-  GET_PLATFORM_VERSION("getPlatformVersion", 7);
+  GET_PLATFORM_VERSION("getPlatformVersion", 7),
+  GET_USER("get_user",8)
+  ;
+
 
   companion object {
     fun findByCode(value: Int) = values().find { it.code == value }
