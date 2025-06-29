@@ -102,11 +102,9 @@ class ZettleAndroidPlugin: FlutterPlugin, MethodCallHandler, ActivityAware, Plug
   private fun getCurrentUser() {
     val authState = ZettleSDK.instance?.authState?.value
     if (authState is User.AuthState.LoggedIn) {
-        val user = authState.user
+        val user = authState.info.userId
         sendResponse(response = mutableMapOf(
-            "userId" to user.id,
-            "email" to user.email,
-            "name" to user.name,
+            "userId" to user,
             "status" to "loggedIn"
         ))
     } else {
