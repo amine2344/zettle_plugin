@@ -85,6 +85,7 @@ class ZettleAndroidPlugin: FlutterPlugin, MethodCallHandler, ActivityAware, Plug
       when (currentMethod) {
         ZettleMethod.INITIALIZE -> initialize(call.arguments as Map<*, *>)
         ZettleMethod.SHOW_SETTINGS -> showSettings()
+        ZettleMethod.GET_USER -> getCurrentUser()
         ZettleMethod.LOGIN -> login()
         ZettleMethod.LOGOUT -> logout()
         ZettleMethod.REQUEST_PAYMENT -> requestPayment(call.arguments as Map<*, *>)
@@ -97,6 +98,21 @@ class ZettleAndroidPlugin: FlutterPlugin, MethodCallHandler, ActivityAware, Plug
       handleError(e)
     }
   }
+  // get Auth State (current user )  :
+  private fun getCurrentUser() {
+    val authState = ZettleSDK.instance?.authState?.value
+    if (authState is User.AuthState.LoggedIn) {
+        val user = authState.user
+        sendResponse(response = mutableMapOf(
+            "userId" to user.id,
+            "email" to user.email,
+            "name" to user.name,
+            "status" to "loggedIn"
+        ))
+    } else {
+        sendResponse(success = false, errorMessage = "No user is logged in")
+    }
+}
 
   // Initializes the Zettle SDK with the provided configuration.
   private fun initialize(@NonNull args: Map<*, *>){
