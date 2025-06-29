@@ -1,5 +1,7 @@
 package com.example.zettle_android
 
+import android.content.pm.ActivityInfo
+
 import androidx.annotation.NonNull
 import androidx.lifecycle.ProcessLifecycleOwner
 import android.content.Context
@@ -153,7 +155,8 @@ class ZettleAndroidPlugin: FlutterPlugin, MethodCallHandler, ActivityAware, Plug
     val enableInstallments = args.getSafe<Boolean>("enableInstalments")
     val internalUniqueTraceId = args.getSafe<String>("reference")
     val reference = TransactionReference.Builder(internalUniqueTraceId as String).build()
-
+    activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+    
 
      val intent: Intent = CardReaderAction.Payment(
         reference = reference,
@@ -173,6 +176,7 @@ class ZettleAndroidPlugin: FlutterPlugin, MethodCallHandler, ActivityAware, Plug
     val reference = args.getSafe<String>("reference")
     val receiptNumber = args.getSafe<String>("reference")
     val refundReference = TransactionReference.Builder(UUID.randomUUID().toString()).build()
+    activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
 
     val intent: Intent = CardReaderAction.Refund(
       amount = refundAmount?.toLongValue() ?: 0,
